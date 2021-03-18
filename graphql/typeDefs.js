@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server')
+const {gql} = require('apollo-server')
 
 module.exports = gql`
     type User {
@@ -11,7 +11,7 @@ module.exports = gql`
         bookingsHistory : [AppointmentBooking]
         createdAt: String
     }
-    
+
     type Services {
         id: ID
         title: String
@@ -43,7 +43,7 @@ module.exports = gql`
         description: String
         category: String
     }
-    
+
     input inputID {
         id: ID!
     }
