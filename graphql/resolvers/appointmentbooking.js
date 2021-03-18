@@ -20,14 +20,16 @@ module.exports = {
     },
     Mutation: {
         /* creates an appointment booking given description
-        * String -> AppointmentBooking
+        * (description) String, serviceDate(String) -> AppointmentBooking
+        * serviceDate is assuming everything is proper ISO date string
         * */
-        async createAppointmentBooking(_, {description}, context) {
+        async createAppointmentBooking(_, {description, serviceDate}, context) {
 
             const user = checkAuth(context)
+            console.log(serviceDate)
             try {//create a new appointment and save
                 const createdAppointment = new Appointment({
-                    createdAt: new Date().toISOString(),
+                    createdAt: serviceDate,
                     serviceType: description,
                     confirmed: false,
                 })
