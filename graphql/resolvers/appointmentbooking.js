@@ -1,6 +1,8 @@
 const Appointment = require('../models/AppointmentBooking')
 const checkAuth = require('../../utils/checkAuth')
 const User = require('../models/User')
+const {validateAppointmentInput} = require("../../utils/validators");
+const {UserInputError} = require('apollo-server')
 
 /* Special Datatype: AppointmentBooking
 *   confirmed: Boolean, => is this appointment confirmed by an admin yet?
@@ -26,6 +28,10 @@ module.exports = {
         async createAppointmentBooking(_, {description, serviceDate}, context) {
 
             const user = checkAuth(context)
+            const {errors, valid} = validateAppointmentInput(description, serviceDate)
+            if(!valid)
+                throw new UserInputError('Errors', {errors})
+
             try {
                 //create a new appointment and save
                 const createdAppointment = new Appointment({
@@ -70,8 +76,5 @@ module.exports = {
             subscribe: (_, __, {pubsub}) => pubsub.asyncIterator('NEW_BOOKING')
         }
     },
-    AppointmentBooking : {
-
-    }
 
 }

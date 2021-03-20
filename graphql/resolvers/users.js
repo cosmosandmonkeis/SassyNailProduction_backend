@@ -7,7 +7,6 @@ const User = require('../models/User')
 const {validateRegisterInput, validateLoginInput} = require('../../utils/validators')
 
 const AppointmentBooking = require('../models/AppointmentBooking')
-const checkAuth = require('../../utils/checkAuth')
 
 function getToken(user) {
     return jwt.sign({
