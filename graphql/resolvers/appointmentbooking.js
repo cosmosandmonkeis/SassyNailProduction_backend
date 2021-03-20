@@ -26,8 +26,8 @@ module.exports = {
         async createAppointmentBooking(_, {description, serviceDate}, context) {
 
             const user = checkAuth(context)
-            console.log(serviceDate)
-            try {//create a new appointment and save
+            try {
+                //create a new appointment and save
                 const createdAppointment = new Appointment({
                     createdAt: serviceDate,
                     serviceType: description,
