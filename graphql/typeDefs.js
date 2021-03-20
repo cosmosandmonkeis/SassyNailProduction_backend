@@ -63,7 +63,7 @@ module.exports = gql`
         register(registerInput: RegisterInput): User
         addService(serviceInput: ServiceInput): Services
         deleteService(serviceID: ID!): Services
-        createAppointmentBooking(description: String, serviceDate : String): AppointmentBooking
+        createAppointmentBooking(description: String!, serviceDate : String!): AppointmentBooking
         deleteAppointmentBooking(appointmentID: ID!): AppointmentBooking
     }
 

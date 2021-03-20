@@ -29,8 +29,9 @@ module.exports = {
 
             const user = checkAuth(context)
             const {errors, valid} = validateAppointmentInput(description, serviceDate)
-            if(!valid)
-                throw new UserInputError('Errors', {errors})
+            if(!valid){
+                throw new UserInputError('Appointment booking validation error', {errors})
+            }
 
             try {
                 //create a new appointment and save
