@@ -60,12 +60,13 @@ module.exports.validateAppointmentInput = (description, dateString) => {
     const illegal_chars = ['<', '>', '[', ']']
 
     illegal_chars.forEach(char => {
-        if(description.includes(char)) {
-            errors.description = `Description may not contain illegal characters: ${char}`
+        if (description.includes(char)) {
+            errors.description = `Description may not contain illegal characters.
+             Last illegal character detected: ${char}`
         }
     })
 
-    if(moment(dateString, moment.ISO_8601, true).isValid() === false){
+    if (moment(dateString, moment.ISO_8601, true).isValid() === false) {
         errors.dateString = 'Not a valid ISO date string, try again.'
     }
 
