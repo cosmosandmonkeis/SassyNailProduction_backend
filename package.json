@@ -13,7 +13,8 @@
     "apollo-server": "^2.19.0",
     "bcryptjs": "^2.4.3",
     "graphql": "^15.4.0",
-    "mongoose": "^5.10.13"
+    "moment": "^2.29.1",
+    "mongoose": "^5.12.1"
   },
   "devDependencies": {
     "jsonwebtoken": "^8.5.1",
