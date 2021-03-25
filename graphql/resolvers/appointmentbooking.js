@@ -18,6 +18,15 @@ module.exports = {
             } catch (err) {
                 throw new Error(err)
             }
+        },
+        async getUnconfirmedBookings() {
+            try {
+                return await Appointment.find({
+                    confirmed : false
+                })
+            } catch (err) {
+                throw new Error(err)
+            }
         }
     },
     Mutation: {
