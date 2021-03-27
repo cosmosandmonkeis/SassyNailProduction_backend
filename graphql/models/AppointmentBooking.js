@@ -3,7 +3,7 @@ const { model, Schema } = require('mongoose')
 const appointmentSchema = new Schema({
     createdAt: String,
     serviceType: String,
-    confirmed: Boolean
+    status: String
 })
 
 module.exports = model('appointments', appointmentSchema)

@@ -5,7 +5,7 @@ const {validateAppointmentInput} = require("../../utils/validators");
 const {UserInputError} = require('apollo-server')
 
 /* Special Datatype: AppointmentBooking
-*   confirmed: Boolean, => is this appointment confirmed by an admin yet?
+*   status: String, => Unconfirmed, accepted, denied
     createdAt: String, => Date(isostring) of when appointment was created
     serviceType: String => a string description of what was booked
     * ,*/
@@ -22,7 +22,7 @@ module.exports = {
         async getUnconfirmedBookings() {
             try {
                 return await Appointment.find({
-                    confirmed : false
+                    confirmed : "unconfirmed"
                 })
             } catch (err) {
                 throw new Error(err)
@@ -47,7 +47,7 @@ module.exports = {
                 const createdAppointment = new Appointment({
                     createdAt: serviceDate,
                     serviceType: description,
-                    confirmed: false,
+                    status: "unconfirmed",
                 })
 
                 await createdAppointment.save()

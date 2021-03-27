@@ -25,7 +25,7 @@ module.exports = gql`
         id: ID
         createdAt: String
         serviceType : String
-        confirmed: Boolean
+        status: String
     }
 
 
