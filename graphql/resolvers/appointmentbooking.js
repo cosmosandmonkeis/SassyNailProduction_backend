@@ -79,6 +79,17 @@ module.exports = {
             } catch (err) {
                 throw new Error(err)
             }
+        },
+        async updateAppointmentBooking(_, {appointmentID, newStatus}, context) {
+            checkAuth(context)
+            try {
+                return await Appointment.findByIdAndUpdate(appointmentID, {
+                    status: newStatus
+                }, {new: true})
+            }
+            catch (err) {
+                throw new Error(err)
+            }
         }
     },
     Subscription: {
