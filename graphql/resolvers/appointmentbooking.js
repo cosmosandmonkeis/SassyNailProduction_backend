@@ -22,7 +22,7 @@ module.exports = {
         async getUnconfirmedBookings() {
             try {
                 return await Appointment.find({
-                    confirmed : "unconfirmed"
+                    status : "unconfirmed"
                 })
             } catch (err) {
                 throw new Error(err)
