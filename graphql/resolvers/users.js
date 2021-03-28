@@ -80,10 +80,8 @@ module.exports = {
         * */
         async getAUser(_, {username}) {
             try {
-                console.log("inside get a user")
-                const user = await User.findOne({username})
-                console.log(user)
-                return user
+                return await User.findOne({username})
+
             } catch (err) {
                 throw new UserInputError('User not found')
             }
