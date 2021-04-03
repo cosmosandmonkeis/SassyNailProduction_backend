@@ -8,6 +8,8 @@ const {UserInputError} = require('apollo-server')
 *   status: String, => Unconfirmed, accepted, denied
     createdAt: String, => Date(isostring) of when appointment was created
     serviceType: String => a string description of what was booked
+    * status: String => confirmed or denied
+    * adminMessage: String => admin message for confirmation or denial
     * ,*/
 
 module.exports = {
@@ -48,6 +50,7 @@ module.exports = {
                     createdAt: serviceDate,
                     serviceType: description,
                     status: "unconfirmed",
+                    adminMessage: ''
                 })
 
                 await createdAppointment.save()
@@ -80,11 +83,12 @@ module.exports = {
                 throw new Error(err)
             }
         },
-        async updateAppointmentBooking(_, {appointmentID, newStatus}, context) {
+        async updateAppointmentBooking(_, {appointmentID, newStatus, adminMessage}, context) {
             checkAuth(context)
             try {
                 return await Appointment.findByIdAndUpdate(appointmentID, {
-                    status: newStatus
+                    status: newStatus,
+                    adminMessage: adminMessage
                 }, {new: true})
             }
             catch (err) {

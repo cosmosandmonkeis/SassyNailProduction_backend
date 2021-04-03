@@ -67,7 +67,7 @@ module.exports = gql`
         deleteService(serviceID: ID!): Services
         createAppointmentBooking(description: String!, serviceDate : String!): AppointmentBooking
         deleteAppointmentBooking(appointmentID: ID!): AppointmentBooking
-        updateAppointmentBooking(appointmentID: ID!, newStatus: String!, message: String) : AppointmentBooking
+        updateAppointmentBooking(appointmentID: ID!, newStatus: String!, adminMessage: String!) : AppointmentBooking
     }
 
     type Subscription {
