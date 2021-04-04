@@ -6,7 +6,7 @@ const {UserInputError} = require('apollo-server')
 
 /* Special Datatype: AppointmentBooking
 *   status: String, => Unconfirmed, accepted, denied
-    createdAt: String, => Date(isostring) of when appointment was created
+    createdAt: String, => Date of when appointment was created
     serviceType: String => a string description of what was booked
     * status: String => confirmed or denied
     * adminMessage: String => admin message for confirmation or denial
