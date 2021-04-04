@@ -44,7 +44,6 @@ module.exports.validateLoginInput = (username, password) => {
 }
 
 module.exports.validateAppointmentInput = (description, dateString) => {
-    const moment = require('moment')
 
     const errors = {}
     /*
@@ -64,11 +63,11 @@ module.exports.validateAppointmentInput = (description, dateString) => {
             errors.description = `Description may not contain illegal characters.
              Last illegal character detected: ${char}`
         }
+        if (dateString.includes(char)) {
+            errors.dateString = `Date String may not contain illegal characters.
+             Last illegal character detected: ${char}`
+        }
     })
-
-    if (moment(dateString, moment.ISO_8601, true).isValid() === false) {
-        errors.dateString = 'Not a valid ISO date string, try again.'
-    }
 
     return {
         errors,
