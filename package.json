@@ -1,23 +1,25 @@
 {
-  "name": "learnMERNG",
+  "name": "sassynailspabackendproduction",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon index"
+    "start": "nodemon graphql.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.19.0",
+    "apollo-server-lambda": "^2.22.2",
     "bcryptjs": "^2.4.3",
-    "graphql": "^15.4.0",
+    "dotenv": "^8.2.0",
+    "graphql": "^15.5.0",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "mongoose": "^5.12.1"
   },
   "devDependencies": {
-    "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.6"
   }
 }

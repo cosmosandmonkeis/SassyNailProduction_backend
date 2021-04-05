@@ -1,7 +1,8 @@
+require('dotenv').config()
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const {SECRET_KEY} = require('../../src/config')
 const {UserInputError} = require('apollo-server')
+const SECRET_KEY = process.env.SECRET_KEY
 
 const User = require('../models/User')
 const {validateRegisterInput, validateLoginInput} = require('../../utils/validators')
