@@ -17,6 +17,6 @@ const server = new ApolloServer({
     }
 })
 
-mongoose.connect(MONGO_DB, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(MONGO_DB.toString(), {useNewUrlParser: true, useUnifiedTopology: true})
 
 exports.graphqlHandler = server.createHandler();
