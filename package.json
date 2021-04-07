@@ -19,6 +19,5 @@
     "moment": "^2.29.1",
     "mongoose": "^5.12.1"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
