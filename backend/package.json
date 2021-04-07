@@ -4,15 +4,13 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon graphql.js",
-    "localStart": "nodemon index.js"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.19.0",
-    "apollo-server-lambda": "^2.22.2",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "graphql": "^15.5.0",
