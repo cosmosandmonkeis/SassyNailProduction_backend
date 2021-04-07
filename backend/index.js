@@ -6,6 +6,7 @@ const typeDefs = require('./graphql/typeDefs')
 const resolvers = require('./graphql/resolvers')
 const MONGO_DB = process.env.MONGO_DB
 
+const PORT = process.env.port || 5000
 
 const pubsub = new PubSub()
 
@@ -21,7 +22,7 @@ mongoose.connect(MONGO_DB, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(
         () => {
             console.log('MongoDB connected')
-            return server.listen({port: 5000})
+            return server.listen({port: PORT})
         }
     )
     .then(
