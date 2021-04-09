@@ -56,6 +56,10 @@ module.exports.validateAppointmentInput = (description, dateString) => {
         errors.description = 'Description must not be empty';
     }
 
+    if (dateString.trim() === '') {
+        errors.dateString = 'Date entry submission must not be empty';
+    }
+
     const illegal_chars = ['<', '>', '[', ']']
 
     illegal_chars.forEach(char => {
