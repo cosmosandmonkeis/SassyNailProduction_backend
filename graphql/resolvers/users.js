@@ -13,6 +13,7 @@ function getToken(user) {
     return jwt.sign({
         id: user.id,
         email: user.email,
+        admin: user.admin,
         username: user.username
     }, SECRET_KEY, {expiresIn: '1hr'});
 }
