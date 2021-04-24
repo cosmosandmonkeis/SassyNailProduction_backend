@@ -16,7 +16,7 @@ module.exports = {
     Query: {
         async getAppointmentBookings() {
             try {
-                return await Appointment.find()
+                return await Appointment.find().sort({'_id': -1})
             } catch (err) {
                 throw new Error(err)
             }
