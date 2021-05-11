@@ -71,6 +71,18 @@ module.exports = {
                  Details: ${description}`
 
                 // SEND SMS TO ENV PHONE NUMBERS
+                vonage.message.sendSms(from, to1, text, (err, responseData) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        if (responseData.messages[0]['status'] === "0") {
+                            console.log("Message sent successfully.");
+                        } else {
+                            console.log(`Message failed with error: ${responseData.messages[0]['error-text']}`);
+                        }
+                    }
+                })
+
                 vonage.message.sendSms(from, to2, text, (err, responseData) => {
                     if (err) {
                         console.log(err);
