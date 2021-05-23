@@ -50,11 +50,12 @@ module.exports = gql`
     }
 
     type Query {
-        getUsers: [User]
-        getAUser(username: String!) : User
+        #        getUsers: [User]
+        #        getAUser(username: String!) : User
         getServices: [Services]
         getServiceCategory(category: String!): [Services]
         getAService(serviceID: ID!): Services
+        #        protected endpoints
         getAppointmentBookings: [AppointmentBooking]
         getUserBookingsHistory(username: String!): [AppointmentBooking]
         getUnconfirmedBookings : [AppointmentBooking]
@@ -63,14 +64,12 @@ module.exports = gql`
     type Mutation {
         login(username: String!, password: String!): User
         register(registerInput: RegisterInput): User
+        #        admin protected
         addService(serviceInput: ServiceInput): Services
         deleteService(serviceID: ID!): Services
+        #        user protected
         createAppointmentBooking(description: String!, serviceDate : String!): AppointmentBooking
         deleteAppointmentBooking(appointmentID: ID!): AppointmentBooking
         updateAppointmentBooking(appointmentID: ID!, newStatus: String!, adminMessage: String!) : AppointmentBooking
-    }
-
-    type Subscription {
-        newBookings: AppointmentBooking
     }
 `

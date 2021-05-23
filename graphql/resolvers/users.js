@@ -49,15 +49,6 @@ module.exports = {
         },
     },
     Query: {
-        /* a resolver to return all users in mongodb
-        * NoInput -> Array of Users */
-        async getUsers() {
-            try {
-                return await User.find()
-            } catch (err) {
-                throw new Error(err)
-            }
-        },
         /* a resolver to return the bookings history of a user given
         *  a username (String)
         *  String ->  Array of AppointmentBookings
@@ -76,18 +67,6 @@ module.exports = {
                 throw new Error(err)
             }
         },
-        /* a resolver to return a user object given username
-        *  a username (String)
-        *  String ->  User
-        * */
-        async getAUser(_, {username}) {
-            try {
-                return await User.findOne({username})
-
-            } catch (err) {
-                throw new UserInputError('User not found')
-            }
-        }
     }
     ,
     Mutation: {
