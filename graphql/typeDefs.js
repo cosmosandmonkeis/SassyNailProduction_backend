@@ -55,7 +55,7 @@ module.exports = gql`
         getServices: [Services]
         getServiceCategory(category: String!): [Services]
         getAService(serviceID: ID!): Services
-        #        protected endpoints
+        #        admin protected
         getAppointmentBookings: [AppointmentBooking]
         getUserBookingsHistory(username: String!): [AppointmentBooking]
         getUnconfirmedBookings : [AppointmentBooking]

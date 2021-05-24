@@ -22,7 +22,13 @@ const vonage = new Vonage({
 
 module.exports = {
     Query: {
-        async getAppointmentBookings() {
+        async getAppointmentBookings(_, __, context) {
+            const user = checkAuth(context)
+            const databaseUser = await User.findById(user.id)
+
+            if (databaseUser.admin === false)
+                throw new Error('User does not have required privileges')
+            
             try {
                 return await Appointment.find().sort({'_id': -1})
             } catch (err) {
@@ -30,6 +36,13 @@ module.exports = {
             }
         },
         async getUnconfirmedBookings() {
+            const user = checkAuth(context)
+            const databaseUser = await User.findById(user.id)
+
+            if (databaseUser.admin === false)
+                throw new Error('User does not have required privileges')
+
+
             try {
                 return await Appointment.find({
                     status: "unconfirmed"
