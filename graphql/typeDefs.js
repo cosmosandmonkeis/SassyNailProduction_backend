@@ -51,7 +51,7 @@ module.exports = gql`
 
     type Query {
         #        getUsers: [User]
-        #        getAUser(username: String!) : User
+        getAUser(username: String!) : User
         getServices: [Services]
         getServiceCategory(category: String!): [Services]
         getAService(serviceID: ID!): Services
