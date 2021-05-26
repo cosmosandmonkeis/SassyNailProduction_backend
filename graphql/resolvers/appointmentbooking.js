@@ -168,17 +168,17 @@ module.exports = {
                     const text = `Your appointment at Sassy Nails Spa Oakland has been ${newStatus}!
                     Appointment Date:${updated_appointment.createdAt}`
 
-                    // vonage.message.sendSms(from, phone_num, text, (err, responseData) => {
-                    //     if (err) {
-                    //         console.log(err);
-                    //     } else {
-                    //         if (responseData.messages[0]['status'] === "0") {
-                    //             console.log("Message sent successfully.");
-                    //         } else {
-                    //             console.log(`Message failed with error: ${responseData.messages[0]['error-text']}`);
-                    //         }
-                    //     }
-                    // })
+                    vonage.message.sendSms(from, phone_num, text, (err, responseData) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            if (responseData.messages[0]['status'] === "0") {
+                                console.log("Message sent successfully.");
+                            } else {
+                                console.log(`Message failed with error: ${responseData.messages[0]['error-text']}`);
+                            }
+                        }
+                    })
                     console.log(phone_num)
                 }
                 return updated_appointment
