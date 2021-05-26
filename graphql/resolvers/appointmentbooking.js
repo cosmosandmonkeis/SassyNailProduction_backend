@@ -145,16 +145,19 @@ module.exports = {
                     status: newStatus,
                     adminMessage: adminMessage
                 }, {new: true})
-                //grab phone number and send a text if present also add 1 before phone number since Vonage needs that 1
-                let phone_num = updated_appointment.serviceType.match(regex)[0].replace(/\D/g,'')
 
-                if (phone_num != null) {
+                //grab phone number and send a text if present also add 1 before phone number since Vonage needs that 1
+                let phone_num = updated_appointment.serviceType.match(regex)
+
+                if (phone_num !== null) {
+                    phone_num = phone_num[0].replace(/\D/g, '')
+
                     if (phone_num.charAt(0) !== '1') {
                         phone_num = '1'.concat(phone_num)
                     }
                     const from = process.env.FROM
                     const text = `Your appointment at Sassy Nails Spa Oakland has been ${newStatus}!
-                ${adminMessage} Appointment Date:${updated_appointment.createdAt}`
+                    Appointment Date:${updated_appointment.createdAt}`
 
                     vonage.message.sendSms(from, phone_num, text, (err, responseData) => {
                         if (err) {
@@ -167,6 +170,7 @@ module.exports = {
                             }
                         }
                     })
+                    console.log(phone_num)
                 }
                 return updated_appointment
             } catch (err) {
