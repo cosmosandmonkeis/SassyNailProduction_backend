@@ -55,7 +55,7 @@ module.exports = {
         * */
         async getAUser(_, {username}) {
             try {
-                return await User.findOne({username}).select('username')
+                return await User.findOne({username}).select('username admin')
 
             } catch (err) {
                 throw new UserInputError('User not found')
