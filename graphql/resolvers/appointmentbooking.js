@@ -28,7 +28,7 @@ module.exports = {
 
             if (databaseUser.admin === false)
                 throw new Error('User does not have required privileges')
-            
+
             try {
                 return await Appointment.find().sort({'_id': -1})
             } catch (err) {
@@ -140,10 +140,35 @@ module.exports = {
         async updateAppointmentBooking(_, {appointmentID, newStatus, adminMessage}, context) {
             checkAuth(context)
             try {
-                return await Appointment.findByIdAndUpdate(appointmentID, {
+                const regex = new RegExp("(\\+\\d{1,2}\\s?)?1?\\-?\\.?\\s?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}")
+                const updated_appointment = await Appointment.findByIdAndUpdate(appointmentID, {
                     status: newStatus,
                     adminMessage: adminMessage
                 }, {new: true})
+                //grab phone number and send a text if present also add 1 before phone number since Vonage needs that 1
+                let phone_num = updated_appointment.serviceType.match(regex)[0].replace(/\D/g,'')
+
+                if (phone_num != null) {
+                    if (phone_num.charAt(0) !== '1') {
+                        phone_num = '1'.concat(phone_num)
+                    }
+                    const from = process.env.FROM
+                    const text = `Your appointment at Sassy Nails Spa Oakland has been ${newStatus}!
+                ${adminMessage} Appointment Date:${updated_appointment.createdAt}`
+
+                    vonage.message.sendSms(from, phone_num, text, (err, responseData) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            if (responseData.messages[0]['status'] === "0") {
+                                console.log("Message sent successfully.");
+                            } else {
+                                console.log(`Message failed with error: ${responseData.messages[0]['error-text']}`);
+                            }
+                        }
+                    })
+                }
+                return updated_appointment
             } catch (err) {
                 throw new Error(err)
             }
