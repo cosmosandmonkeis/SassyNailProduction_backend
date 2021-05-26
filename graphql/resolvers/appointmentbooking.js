@@ -35,7 +35,7 @@ module.exports = {
                 throw new Error(err)
             }
         },
-        async getUnconfirmedBookings() {
+        async getUnconfirmedBookings(_, __, context) {
             const user = checkAuth(context)
             const databaseUser = await User.findById(user.id)
 
