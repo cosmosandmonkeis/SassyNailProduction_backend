@@ -49,18 +49,6 @@ module.exports = {
         },
     },
     Query: {
-        /* a resolver to return a user object given username
-        *  a username (String)
-        *  String ->  User
-        * */
-        async getAUser(_, {username}) {
-            try {
-                return await User.findOne({username}).select('username admin')
-
-            } catch (err) {
-                throw new UserInputError('User not found')
-            }
-        },
         /* a resolver to return the bookings history of a user given
         *  a username (String)
         *  String ->  Array of AppointmentBookings
