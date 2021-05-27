@@ -56,7 +56,7 @@ module.exports = gql`
         getAService(serviceID: ID!): Services
         #        admin protected
         getAppointmentBookings: [AppointmentBooking]
-        getUserBookingsHistory(username: String!): [AppointmentBooking]
+        getUserBookingsHistory: [AppointmentBooking]
         getUnconfirmedBookings : [AppointmentBooking]
     }
 

@@ -6,6 +6,7 @@ const SECRET_KEY = process.env.SECRET_KEY
 
 const User = require('../models/User')
 const {validateRegisterInput, validateLoginInput} = require('../../utils/validators')
+const checkAuth = require('../../utils/checkAuth')
 
 const AppointmentBooking = require('../models/AppointmentBooking')
 
@@ -34,9 +35,7 @@ function getToken(user) {
 module.exports = {
     User: {
         bookingsHistory: async (parent) => {
-
             try {
-
                 const ids = parent.bookingsHistory
                 return await AppointmentBooking.find({
                     '_id': {
@@ -53,11 +52,13 @@ module.exports = {
         *  a username (String)
         *  String ->  Array of AppointmentBookings
         * */
-        async getUserBookingsHistory(_, {username}) {
-            try {
-                const user = await User.findOne({username})
+        async getUserBookingsHistory(_, __, context) {
 
+            try {
+                const checked = checkAuth(context)
+                const user = await User.findOne({username: checked.username}, 'bookingsHistory')
                 const ids = user.bookingsHistory
+
                 return await AppointmentBooking.find({
                     '_id': {
                         $in: ids
