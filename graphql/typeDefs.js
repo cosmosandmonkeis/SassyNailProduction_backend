@@ -93,6 +93,6 @@ module.exports = gql`
         deleteAppointmentBooking(appointmentID: ID!): AppointmentBooking
         updateAppointmentBooking(appointmentID: ID!, newStatus: String!, adminMessage: String!) : AppointmentBooking
         #        admin protected
-        addSales(saleInput: SaleInput) : Boolean
+        addSales(saleInput: SaleInput) : Sales
     }
 `
