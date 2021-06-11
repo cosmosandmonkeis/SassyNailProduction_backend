@@ -29,6 +29,17 @@ module.exports = gql`
         adminMessage: String
     }
 
+    type Sales {
+        customerName: String
+        partySize: Int
+        saleDate: String
+        totalPrice: Int
+        tipPrice: Int
+        paymentMethod: String
+        employees: [String]
+        services: [Services]
+    }
+
 
     input RegisterInput {
         username: String
@@ -47,6 +58,17 @@ module.exports = gql`
 
     input inputID {
         id: ID!
+    }
+
+    input SaleInput {
+        customerName: String
+        partySize: Int
+        saleDate: String
+        totalPrice: Int
+        tipPrice: Int
+        paymentMethod: String
+        employees: [String]
+        services: [ID]
     }
 
     type Query {
@@ -70,5 +92,7 @@ module.exports = gql`
         createAppointmentBooking(description: String!, serviceDate : String!): AppointmentBooking
         deleteAppointmentBooking(appointmentID: ID!): AppointmentBooking
         updateAppointmentBooking(appointmentID: ID!, newStatus: String!, adminMessage: String!) : AppointmentBooking
+        #        admin protected
+        addSales(saleInput: SaleInput) : Boolean
     }
 `
