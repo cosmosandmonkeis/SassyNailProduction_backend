@@ -37,7 +37,6 @@ module.exports = {
             }
         }, context) {
 
-            console.log('everything all good')
             const user = checkAuth(context)
             const databaseUser = await User.findById(user.id)
 
