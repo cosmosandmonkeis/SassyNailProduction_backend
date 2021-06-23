@@ -9,7 +9,8 @@ module.exports = {
     Query: {
         ...serviceResolvers.Query,
         ...usersResolvers.Query,
-        ...appointmentbookingResolvers.Query
+        ...appointmentbookingResolvers.Query,
+        ...salesResolvers.Query
     },
     Mutation: {
         ...serviceResolvers.Mutation,
