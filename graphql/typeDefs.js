@@ -80,6 +80,8 @@ module.exports = gql`
         getAppointmentBookings: [AppointmentBooking]
         getUserBookingsHistory: [AppointmentBooking]
         getUnconfirmedBookings : [AppointmentBooking]
+        #        admin protected
+        getPointOfSales: [Sales]
     }
 
     type Mutation {
