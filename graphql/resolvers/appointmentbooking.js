@@ -19,6 +19,48 @@ const vonage = new Vonage({
     * status: String => confirmed or denied
     * adminMessage: String => admin message for confirmation or denial
     * ,*/
+async function autoConfirm(appointmentID, newStatus, adminMessage ) {
+    // only works 10 digit numbers exlcusively ex: 510 123 4312
+    const regex = /(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/;
+    const updated_appointment = await Appointment.findByIdAndUpdate(appointmentID, {
+        status: newStatus,
+        adminMessage: adminMessage
+    }, {new: true})
+
+    let phone_num = updated_appointment.serviceType
+
+    // apply regex to string
+    phone_num = phone_num.match(regex)
+
+    if (phone_num !== null) {
+        console.log('Before: ' + phone_num)
+
+        // remove any non-parenthses or dashes etc...
+        phone_num = phone_num[0].replace(/\D/g, '')
+
+        // reintroduce 1 back into beginning for Vonage
+        if (phone_num.charAt(0) !== '1') {
+            phone_num = '1'.concat(phone_num)
+            console.log("attaching 1 before")
+        }
+        console.log('After: ' + phone_num)
+        const from = process.env.FROM
+        const text = `Your appointment at Sassy Nails Spa Oakland has been ${newStatus}!
+                    Appointment Date:${updated_appointment.createdAt}`
+
+        vonage.message.sendSms(from, phone_num, text, (err, responseData) => {
+            if (err) {
+                console.log(err);
+            } else {
+                if (responseData.messages[0]['status'] === "0") {
+                    console.log("Message sent successfully.");
+                } else {
+                    console.log(`Message failed with error: ${responseData.messages[0]['error-text']}`);
+                }
+            }
+        })
+    }
+}
 
 module.exports = {
     Query: {
@@ -122,6 +164,12 @@ module.exports = {
                 await context.pubsub.publish('NEW_BOOKING', {
                     newBookings: createdAppointment
                 })
+
+                await autoConfirm(
+                    createdAppointment.id,
+                    'confirmed',
+                   'Appointment confirmed! See you then!'
+                )
 
                 return createdAppointment
             } catch (err) {
