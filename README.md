@@ -1,4 +1,4 @@
-# SassyNailProduction_backend
+# SassyNailProduction_backend - Deprecated
 The repository for Sassy Nails Spa graphql backend. URL for deployment: https://sns-gql-backend.herokuapp.com. Written with graphql + apollojs.
 To build:
 1. npm install
